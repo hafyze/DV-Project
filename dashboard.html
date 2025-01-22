@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard d3.js</title>
+    <!-- Tailwind CSS cdn -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- Header -->
+    <header class="bg-blue-700 text-white py-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold ml-2">Dashboard</h1>
+            <nav>
+                <!-- TODO: link our charts here -->
+                <!-- <ul class="flex space-x-4">
+                    <li><a href="#" class="hover:underline">Chart 1</a></li>
+                    <li><a href="#" class="hover:underline">Chart 2</a></li>
+                    <li><a href="#" class="hover:underline">Chart 3</a></li>
+                </ul> -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <!-- NOTE: Tak finalise lagi -->
+        <!-- Filters Section -->
+        <!-- <div class="bg-white p-4 shadow-md rounded-lg mb-6">
+            <h2 class="text-lg font-bold mb-2">Filters</h2>
+            <div class="flex space-x-4">
+                <button id="filterYear" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Filter by
+                    Year</button>
+                <button id="filterMonth" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Filter by
+                    Month</button>
+                <button id="filterDay" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Filter by
+                    Day</button>
+            </div>
+        </div> -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Chart 1 -->
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Chart 1</h2>
+                <div id="lineChart" class="h-64"></div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Chart 2</h2>
+                <div id="chrolopoleth" class="h-64"></div>
+            </div>
+
+            <!-- Chart 3 -->
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Chart 3</h2>
+                <div id="paretoChart" class="h-64"></div>
+            </div>
+
+            <!-- Example -->
+             <div class="bg-white p-4 shadow-md rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Example Chart</h2>
+                <div id="example" class="h-64"></div>
+             </div>
+        </div>
+    </main>
+
+    <script src="scripts/lineChart.js"></script>
+    <script src="scripts/chrolopleth.js"></script>
+    <script src="scripts/paretoChart.js"></script>
+    <script src="scripts/example.js"></script>
+</body>
+
+</html>
