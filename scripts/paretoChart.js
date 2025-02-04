@@ -118,10 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Axes
         svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(xScale))
             .selectAll("text")
+            .text(d => d.length > 10 ? d.slice(0,9) + "...": d)
             .style("text-anchor", "end")
-            .attr("dx", "-0.8em")
-            .attr("dy", "0.15em")
-            .attr("transform", "rotate(-23)");
+            .attr("dx", "1em")
+            .attr("dy", "0.8em")
+            .attr("transform", "rotate(-22)");
 
         svg.append("g").call(d3.axisLeft(yScale));
         svg.append("g").attr("transform", `translate(${width},0)`).call(d3.axisRight(yScaleRight));
