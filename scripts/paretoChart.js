@@ -28,16 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
             (d) => d.Country
         );
 
-        // Convert map to array and sort by emissions
         let aggregatedArray = Array.from(aggregatedData, ([country, total]) => ({
             country,
             total,
         })).sort((a, b) => b.total - a.total);
 
-        // Select top 10 countries
+        // FIlter top 10 countries
         aggregatedArray = aggregatedArray.slice(0, 10);
 
-        // Calculate cumulative percentage for Pareto curve
+        // Calculate cumulative percentage for Pareto curve line
         let cumulative = 0;
         const totalEmissions = d3.sum(aggregatedArray, (d) => d.total);
         aggregatedArray.forEach((d) => {
