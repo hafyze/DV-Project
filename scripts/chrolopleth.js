@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load JSON map (world countries)
     Promise.all([
-        d3.json("/DV-Project-main/data/countries.geo.json"),
-        d3.csv("/DV-Project-main/data/climate_change_dataset.csv")
+        d3.json("data/countries.geo.json"),
+        d3.csv("data/climate_change_dataset.csv")
     ]).then(([worldData, data]) => {
         console.log("GeoJSON Loaded:", worldData);
         console.log("CSV Loaded:", data);
