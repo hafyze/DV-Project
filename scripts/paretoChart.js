@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .attr("height", (d) => height - yScale(d.total))
             .attr("fill", "steelblue")
             .on("mouseover", (event, d) => {
-                tooltip.style("visibility", "visible").text(`${d.country}: ${d.total.toFixed(2)} Tons/Capita`);
+                tooltip.style("visibility", "visible").html(`<strong>${d.country}</strong>: ${d.total.toFixed(2)} Tons/Capita`);
             })
             .on("mousemove", (event) => {
                 tooltip.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .attr("r", 4)
             .attr("fill", "red")
             .on("mouseover", (event, d) => {
-                tooltip.style("visibility", "visible").html(`${d.country}:<br>${d.percentage.toFixed(2)}% Contribution<br><style='display:inline-block;'>${d.cumulative.toFixed(2)}% Cumulative`);
+                tooltip.style("visibility", "visible").html(`<strong> ${d.country} </strong>:<br>${d.percentage.toFixed(2)}% Contribution<br><style='display:inline-block;'>${d.cumulative.toFixed(2)}% Cumulative`);
             })
             .on("mousemove", (event) => {
                 tooltip.style("top", `${event.pageY - 10}px`).style("left", `${event.pageX + 10}px`);

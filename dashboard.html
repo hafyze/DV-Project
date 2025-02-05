@@ -16,15 +16,14 @@
     <!-- Header -->
     <header class="bg-blue-700 text-white py-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold ml-2">Dashboard</h1>
-            <nav>
-                <!-- TODO: link our charts here -->
-                <!-- <ul class="flex space-x-4">
+            <h1 class="text-2xl font-bold ml-2">EcoEarth Dashboard</h1>
+            <!-- <nav>
+                <ul class="flex space-x-4">
                     <li><a href="#" class="hover:underline">Chart 1</a></li>
                     <li><a href="#" class="hover:underline">Chart 2</a></li>
                     <li><a href="#" class="hover:underline">Chart 3</a></li>
-                </ul> -->
-            </nav>
+                </ul>
+            </nav> -->
         </div>
     </header>
 
@@ -32,7 +31,7 @@
     <main class="container mx-auto p-6">
         <!-- NOTE: Tak finalise lagi -->
         <!-- Filters Section -->
-        <!-- <div class="bg-white p-4 shadow-md rounded-lg mb-6">
+        <div class="bg-white p-4 shadow-md rounded-lg mb-6">
             <h2 class="text-lg font-bold mb-2">Filters</h2>
             <div class="flex space-x-4">
                 <button id="filterYear" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Filter by
@@ -42,22 +41,13 @@
                 <button id="filterDay" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Filter by
                     Day</button>
             </div>
-        </div> -->
-
-        <div class="grid grid-cols-1 gap-6">
-            <!-- Choropleth Map (First Row, Full Width) -->
-            <div class="bg-white p-4 shadow-md rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Renewable Energy Usage by Country</h2>
-                <div id="chrolopoleth" class="h-auto w-full min-h-[500px]"></div>
-            </div>
         </div>
 
-        <!-- Second Row: Chart 1 (Left) and Pareto Chart (Right) -->
+        <!-- 1st Row: Line Chart (Left) and Pareto Chart (Right) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <!-- Chart 1 -->
-
+            <!-- Line Chart -->
             <div class="bg-white p-4 shadow-md rounded-lg">
-                <h2 class="text-xl font-bold mb-2">Chart 1</h2>
+                <h2 class="text-xl font-bold mb-2">Extreme Weather Events by Year</h2>
                 <div id="lineChart" class="h-64"></div>
             </div>
 
@@ -65,6 +55,14 @@
             <div class="bg-white p-4 shadow-md rounded-lg">
                 <h2 class="text-xl font-bold mb-2">Top 10 CO₂ Emissions by Country</h2>
                 <div id="paretoChart" class="h-64"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6">
+            <!-- Choropleth Map -->
+            <div class="bg-white mt-4 p-4 shadow-md rounded-lg">
+                <h2 class="text-xl font-bold mb-2">Renewable Energy Usage by Country</h2>
+                <div id="chrolopoleth" class="h-auto w-full min-h-[500px]"></div>
             </div>
         </div>
     </main>
