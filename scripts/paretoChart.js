@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const yScale = d3
             .scaleLinear()
             .domain([0, d3.max(aggregatedArray, (d) => d.total)])
+            .nice()
             .range([height, 0]);
 
         const yScaleRight = d3
