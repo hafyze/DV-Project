@@ -130,13 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
   
       // Add a title for the chart
-      svg
+      /*svg
         .append("text")
         .attr("x", width / 2)
         .attr("y", -10)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .text("Extreme Weather Events by Year");
+        */
   
       // Add x-axis label
       svg
