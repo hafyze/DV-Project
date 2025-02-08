@@ -121,11 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 .on("mouseout", () => {
                     tooltip.style("visibility", "hidden");
                 });
-                
+
             // Axes
             svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(xScale))
                 .selectAll("text")
-                .text(d => d.length > 10 ? d.slice(0,9) + "...": d)
                 .style("text-anchor", "end")
                 .attr("dx", "1em")
                 .attr("dy", "0.8em")
