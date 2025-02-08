@@ -34,16 +34,16 @@
         <div class="bg-white p-4 shadow-md rounded-lg mb-6">
             <h2 class="text-lg font-bold mb-2">Filters</h2>
             <div class="flex space-x-4">
-                <button id="filterYear" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Filter by
-                    Year</button>
-                <button id="filterMonth" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Filter by
-                    Month</button>
-                <button id="filterDay" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Filter by
-                    Day</button>
+                <label for="yearSelect" class="font-medium">Select Year:</label>
+                <select id="yearSelect" class="border rounded px-3 py-1">
+                    <!-- Year options will be populated dynamically -->
+                     <option selected value="all">All Years</option>
+                </select>
             </div>
         </div>
+        
 
-        <!-- 1st Row: Line Chart (Left) and Pareto Chart (Right) -->
+        <!-- Row: Line Chart (Left) and Pareto Chart (Right) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <!-- Line Chart -->
             <div class="bg-white p-4 shadow-md rounded-lg">
