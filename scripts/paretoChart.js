@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .attr("y", (d) => yScale(d.total))
                 .attr("width", xScale.bandwidth())
                 .attr("height", (d) => height - yScale(d.total))
-                .attr("fill", "steelblue")
+                .attr("fill", "#8a867c")
                 .on("mouseover", function (event, d) {
                     tooltip.style("visibility", "visible")
                         .html(`<strong>${d.country}</strong>: ${d.total.toFixed(2)} Tons`)
@@ -123,12 +123,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
             // Axes
-            svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(xScale))
-                .selectAll("text")
+            function updateAxisRotation() {
+                const screenWidth = window.innerWidth;
+                const rotationAngle = screenWidth < 768 ? -30 : -15; // Adjust breakpoint if needed
+            
+                svg.selectAll("g.x-axis text")
+                    .attr("transform", `rotate(${rotationAngle})`);
+            }
+            
+            // Append X-axis and apply class for selection
+            const xAxis = svg.append("g")
+                .attr("class", "x-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(xScale));
+            
+            xAxis.selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "1em")
-                .attr("dy", "0.8em")
-                .attr("transform", "rotate(-22)");
+                .attr("dy", "0.8em");
+            
+            // Initial call and update on resize
+            updateAxisRotation();
+            window.addEventListener("resize", updateAxisRotation);            
 
             svg.append("g").call(d3.axisLeft(yScale));
             svg.append("g").attr("transform", `translate(${width},0)`).call(d3.axisRight(yScaleRight));
