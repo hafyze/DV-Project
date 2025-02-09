@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // Add the y-axis
     // -------------------------------
-    const yAxisGroup = svg.append("g").call(d3.axisLeft(yScale));
+    const yAxis = svg.append("g").call(d3.axisLeft(yScale));
 
     // -------------------------------
     // DRAW THE LINE SEGMENTS (instead of one continuous path)
@@ -269,8 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const midY = (y1 + y2) / 2;
         // Determine horizontal offset based on whether it's a spike or decrease:
         // For spikes (diff > 0), shift left; for decreases (diff < 0), shift right.
-        const xOffset = seg.diff > 0 ? -15 : 10;
-        const yOffset = seg.diff > 0 ? -15 : -10; // vertical offset
+        const xOffset = seg.diff > 0 ? -15 : 15;
+        const yOffset = seg.diff > 0 ? -15 : -3; // vertical offset
         svg
           .append("text")
           .attr("class", "annotation")
