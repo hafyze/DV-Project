@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
         adjustLayout();
     }
 
-        updateMap("all"); // Default year will load all upon loading to page
+        updateMap("2023"); // Default year will load all upon loading to page
 
     document.getElementById("yearSelect").addEventListener("change", (event) => {
         updateMap(event.target.value);
