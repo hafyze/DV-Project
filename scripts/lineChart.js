@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Set up margins and dimensions (increase bottom margin to accommodate buttons)
-  const margin = { top: 30, right: 30, bottom: 70, left: 60 };
+  const margin = { top: 30, right: 30, bottom: 80, left: 60 };
   const container = document.getElementById("lineChart");
   const width = container.clientWidth - margin.left - margin.right;
   const height = container.clientHeight - margin.top - margin.bottom;
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", height + margin.bottom - 25)
+      .attr("y", height + margin.bottom - 45)
       .attr("text-anchor", "middle")
       .style("font-size", "12px")
       .text("Year");
