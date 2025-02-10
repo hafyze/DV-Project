@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Axes
             function updateAxisRotation() {
                 const screenWidth = window.innerWidth;
-                const rotationAngle = screenWidth < 768 ? -30 : -15; // Adjust breakpoint if needed
+                const rotationAngle = screenWidth < 768 ? -30 : -15;
             
                 svg.selectAll("g.x-axis text")
                     .attr("transform", `rotate(${rotationAngle})`);
