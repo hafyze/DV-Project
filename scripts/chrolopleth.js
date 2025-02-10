@@ -60,37 +60,37 @@ document.addEventListener("DOMContentLoaded", () => {
             "UK": "United Kingdom",
         };
 
-        function updateMap(selectedYear) {
-            svg.selectAll("*").remove();
-            legendContainer.selectAll("*").remove();
+function updateMap(selectedYear) {
+    svg.selectAll("*").remove();
+    legendContainer.selectAll("*").remove();
 
-            // Filter data based on selected year
-            const filteredData = selectedYear === "all"
-                ? data
-                : data.filter(d => d.Year == selectedYear);
+    // Ensure that "All Years" only shows data for 2023
+    const filteredData = selectedYear === "all"
+        ? data.filter(d => d.Year == "2023")  // Show only 2023 data
+        : data.filter(d => d.Year == selectedYear);
 
-            const countryData = {};
-            filteredData.forEach(d => {
-            const countryName = countryNameMap[d.Country] || d.Country;
-                countryData[countryName] = +d["Renewable Energy (%)"];
-        });
-        
-        // Convert to an array and sort by highest Renewable Energy (%)
-            const sortedCountries = Object.entries(countryData)
-            .map(([country, value]) => ({ country, value }))
-            .sort((a, b) => b.value - a.value);
+    const countryData = {};
+    filteredData.forEach(d => {
+        const countryName = countryNameMap[d.Country] || d.Country;
+        countryData[countryName] = +d["Renewable Energy (%)"];
+    });
 
-        // Define new light yellow to green to dark blue color scale
-        const colorScale = d3.scaleLinear()
-            .domain([5, 15, 25, 35, 45, 50])
-            .range(["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837", "#08306b"]);
+    // Convert to an array and sort by highest Renewable Energy (%)
+    const sortedCountries = Object.entries(countryData)
+        .map(([country, value]) => ({ country, value }))
+        .sort((a, b) => b.value - a.value);
 
-        // Define projection and path with zoom support
-        const projection = d3.geoNaturalEarth1()
-            .scale(160)
-            .translate([width / 2, height / 2]);
+    // Define color scale
+    const colorScale = d3.scaleLinear()
+        .domain([5, 15, 25, 35, 45, 50])
+        .range(["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837", "#08306b"]);
 
-        const path = d3.geoPath().projection(projection);
+    // Define projection and path
+    const projection = d3.geoNaturalEarth1()
+        .scale(160)
+        .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
 
         const zoom = d3.zoom()
             .scaleExtent([1, 8])
@@ -100,29 +100,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         svg.call(zoom);
 
-        // Create a group for the map
-        const g = svg.append("g");
+    // Create a group for the map
+    const g = svg.append("g");
 
-        // Draw countries
-        g.selectAll(".country")
-            .data(worldData.features)
-            .enter()
-            .append("path")
-            .attr("class", "country")
-            .attr("d", path)
-            .attr("fill", d => countryData[d.properties.name] !== undefined ? colorScale(countryData[d.properties.name]) : "#eee")
-            .attr("stroke", "white")
-            .on("mouseover", function (event, d) {
-                d3.select(this).attr("stroke", "black");
-                tooltip.style("display", "block")
-                    .html(`<strong>${d.properties.name}</strong><br>Renewable Energy (${selectedYear}): ${countryData[d.properties.name] !== undefined ? countryData[d.properties.name] + '%' : 'N/A'}`)
-                    .style("left", `${event.pageX + 10}px`)
-                    .style("top", `${event.pageY + 10}px`);
-            })
-            .on("mouseout", function () {
-                d3.select(this).attr("stroke", "white");
-                tooltip.style("display", "none");
-            });
+    // Draw countries
+    g.selectAll(".country")
+        .data(worldData.features)
+        .enter()
+        .append("path")
+        .attr("class", "country")
+        .attr("d", path)
+        .attr("fill", d => countryData[d.properties.name] !== undefined ? colorScale(countryData[d.properties.name]) : "#eee")
+        .attr("stroke", "white")
+        .on("mouseover", function (event, d) {
+            d3.select(this).attr("stroke", "black");
+            tooltip.style("display", "block")
+                .html(`<strong>${d.properties.name}</strong><br>Renewable Energy (${selectedYear === "all" ? "2023" : selectedYear}): 
+                      ${countryData[d.properties.name] !== undefined ? countryData[d.properties.name] + '%' : 'N/A'}`)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY + 10}px`);
+        })
+        .on("mouseout", function () {
+            d3.select(this).attr("stroke", "white");
+            tooltip.style("display", "none");
+        });
 
         // Tooltip
         const tooltip = d3.select("body").append("div")
@@ -176,20 +177,20 @@ document.addEventListener("DOMContentLoaded", () => {
             .text("50.0%");
 
         // Add ranking title
-        legendContainer.append("h3")
-            .text(`Top Renewable Energy Countries (${selectedYear})`)
-            .style("margin-top", "10px");
+    legendContainer.append("h3")
+        .text(`Top Renewable Energy Countries (${selectedYear === "all" ? "2023" : selectedYear})`)
+        .style("margin-top", "10px");
 
         // Populate ranking list
-        sortedCountries.forEach((d, i) => {
-            legendContainer.append("p").html(`<strong>${i + 1}. ${d.country}</strong>: ${d.value}%`);
-        });
+    sortedCountries.forEach((d, i) => {
+        legendContainer.append("p").html(`<strong>${i + 1}. ${d.country}</strong>: ${d.value}%`);
+    });
 
-        // Adjust layout after data is loaded
-        adjustLayout();
-    }
+    // Adjust layout after data is loaded
+    adjustLayout();
+}
 
-        updateMap("2023"); // Default year will load all upon loading to page
+        updateMap("2023"); // Default year
 
     document.getElementById("yearSelect").addEventListener("change", (event) => {
         updateMap(event.target.value);
