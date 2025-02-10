@@ -27,6 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
     .style("pointer-events", "none")
     .style("opacity", 0);
 
+  // Create another tooltip for the explanation of bold lines
+  const explanationTooltip = d3
+    .select("body")
+    .append("div")
+    .attr("class", "explanation-tooltip")
+    .style("position", "absolute")
+    .style("background", "rgba(50, 50, 50, 0.8)")
+    .style("color", "#fff")
+    .style("padding", "5px 10px")
+    .style("border-radius", "4px")
+    .style("pointer-events", "none")
+    .style("opacity", 0);
+
   // Load the CSV data
   d3.csv("data/climate_change_dataset.csv").then((data) => {
     // Aggregate data by year for Extreme Weather Events (summing if a year appears more than once)
@@ -93,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to update the rotation of the x-axis labels based on screen width
     function updateAxisRotation() {
       const screenWidth = window.innerWidth;
-      const rotationAngle = screenWidth < 768 ? -30 : 0; // Use -30° for small screens, -15° for larger screens
+      const rotationAngle = screenWidth < 768 ? -30 : 0;
       svg.selectAll("g.x-axis text")
         .attr("transform", `rotate(${rotationAngle})`);
     }
@@ -122,7 +135,31 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("x2", (d) => xScale(d.end.year))
       .attr("y2", (d) => yScale(d.end.total))
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      // Add event listeners to show the explanation tooltip when a bold (highlighted) line is hovered
+      .on("mouseover.explanation", function(event, d) {
+        const strokeWidth = d3.select(this).attr("stroke-width");
+        if (parseFloat(strokeWidth) >= 6) {
+          let explanationText = "";
+          if (d.diff > 0) {
+            explanationText = `The number of extreme weather events spiked to ${d.end.total} (year ${d.end.year}) from ${d.start.total} (year ${d.start.year})  .`;
+          } else {
+            explanationText = `The number of extreme weather events decreased to ${d.end.total} (year ${d.end.year}) from ${d.start.total} (year ${d.start.year}) .`;
+          }
+          explanationTooltip
+            .transition()
+            .duration(100)
+            .style("opacity", 1);
+          explanationTooltip
+            .html(explanationText)
+            .style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY - 28 + "px");
+        }
+      })
+      
+      .on("mouseout.explanation", function(event, d) {
+        explanationTooltip.transition().duration(100).style("opacity", 0);
+      });
 
     // Draw circles for each data point
     const circles = svg
